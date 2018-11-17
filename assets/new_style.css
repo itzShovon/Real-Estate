@@ -1,0 +1,15 @@
+.left_pad_rt {
+
+    margin-left: 90px;
+
+}
+
+.left_pad_left, .left_pad_rt {
+
+    width: 90px;
+    text-decoration: none;
+    position: absolute;
+    bottom: 0;
+    padding: 7px 5px;
+
+}
