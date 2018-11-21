@@ -87,7 +87,6 @@
             font-size: 40px;
         }
     </style>
-<!--
     <div id = "confirm" class="alert alert-info fade in">
         <div class = "message">This site is under construction.</div>
         <h2 class="message">For details please contact.</h2>
@@ -97,7 +96,6 @@
         <br>
         <button class = "yes btn btn-primary">OK</button>
     </div>
--->
 <!--
     <script>
         function myFunction() {
@@ -167,7 +165,7 @@
 <a href="index.php"><img src="images/logo.png" alt="Realestate"></a>
 
               <ul class="pull-right">
-                <li><a href="blog.php">Post Property</a></li>
+                <li><a href="blog.php">Properties</a></li>
                 <li><a href="buysalerent.php">Sale</a></li>         
                 <li><a href="buysalerent.php">Rent</a></li>
               </ul>

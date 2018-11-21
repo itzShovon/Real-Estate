@@ -10,7 +10,7 @@
 
 
 <div class="container">
-  <a class="message btn btn-primary" href="add-blog.php" target="_blank" style="width: auto; margin: 10px; font-size: 30px;">Add NewPost</a>
+<!--  <a class="message btn btn-primary" href="add-blog.php" target="_blank" style="width: auto; margin: 10px; font-size: 30px;">Add NewPost</a>-->
 <div class="spacer blog">
 <div class="row">
   <div class="col-lg-8 col-sm-12 ">
