@@ -1,3 +1,10 @@
+<?php
+    // session_start();
+    include('assets/custom/php/session.php');
+    include('assets/custom/php/config.php');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,9 +148,23 @@
               <ul class="nav navbar-nav navbar-right">
                <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="about.php">About</a></li>
-                <li><a href="add-post.php">Add Post</a></li>         
+                <?php
+                  if(isset($_SESSION['flag'])){
+                    if($_SESSION['flag'] === '1'){
+                        echo '<li><a href="add-post.php">Add Post</a></li>';
+                        echo '<li><a href="dashboard.php">Dashboard</a></li>';
+                    }
+                  }
+                ?>
                 <li><a href="blog.php">Blog</a></li>
                 <li><a href="contact.php">Contact</a></li>
+                <?php
+                  if(isset($_SESSION['flag'])){
+                    if($_SESSION['flag'] != '1');
+                        else
+                            echo '<li><a href="assets/custom/php/logout.php">Logout</a></li>';
+                  }
+                ?>
               </ul>
             </div>
             <!-- #Nav Ends -->
@@ -166,8 +187,8 @@
 
               <ul class="pull-right">
                 <li><a href="blog.php">Properties</a></li>
-                <li><a href="buysalerent.php">Sale</a></li>         
-                <li><a href="buysalerent.php">Rent</a></li>
+                <li><a href="buysalerent.php?act=sell&page=0">Sale</a></li>         
+                <li><a href="buysalerent.php?act=rent&page=0">Rent</a></li>
               </ul>
 </div>
 <!-- #Header Starts -->

@@ -2,7 +2,7 @@
 <!-- banner -->
 <div class="inside-banner">
   <div class="container"> 
-    <span class="pull-right"><a href="#">Home</a> / Buy</span>
+    <span class="pull-right"><a href="index.php">Home</a> / Buy</span>
     <h2>Buy</h2>
 </div>
 </div>

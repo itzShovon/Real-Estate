@@ -5,10 +5,12 @@
 
 </style>
 <?php include'header.php';?>
+<?php include'assets/custom/php/session.php';?>
+<?php include'assets/custom/php/add-post-helper.php';?>
 <!-- banner -->
 <div class="inside-banner">
     <div class="container">
-        <span class="pull-right"><a href="#">Home</a> / Register</span>
+        <span class="pull-right"><a href="index.php">Home</a> / Register</span>
         <h2>Add New Post</h2>
     </div>
 </div>
@@ -16,88 +18,18 @@
 
 <script src="assets/custom/js/action.js"></script>
 
-<!--
-<script>
-    function commonOptionRent(){
-        var sell = document.getElementById("sell").value;
-        var rent = document.getElementById("rent").value;
-        var state = document.getElementById("state");
-        var area = document.getElementById("area");
-        var maxprice = document.getElementById("maxprice");
-        var minprice = document.getElementById("minprice");
-        var room = document.getElementById("room");
-        var seat = document.getElementById("seat");
-        var stateX = document.getElementById("state");
-        
-        sell = "";
-        state.style.display = "none";
-        area.style.display = "none";
-        maxprice.style.display = "none";
-        minprice.style.display = "none";
-        stateX.style.display = "none";
-        stateX = "";
-//        stateX();
-
-        if(rent != ""){
-            state.style.display = "block";
-            area.style.display = "block";
-            maxprice.style.display = "block";
-            minprice.style.display = "block";
-        }
-        else{
-            state.style.display = "none";
-            area.style.display = "none";
-            maxprice.style.display = "none";
-            minprice.style.display = "none";
-        }
-
-        if((rent === "Apartment") || (rent === "Building") ||  (rent === "IndependentHouse") ||  (rent === "IndependentFloor")){
-            room.style.display = "block";
-        }
-        else
-            room.style.display = "none";
-
-        if((rent === "Room") || (rent === "Vehicle")){
-            seat.style.display = "block";
-        }
-        else
-            seat.style.display = "none";
-    }
-</script>
-<script>
-    function stateX(){
-        var stateX = document.getElementById("state").value;
-        var staterajshahi = document.getElementById("staterajshahi");
-        var statedhaka = document.getElementById("statedhaka");
-        
-        if(stateX === "Rajshahi"){
-            staterajshahi.style.display = "block";
-            statedhaka.style.display = "none";
-        }
-        else if(stateX === "Dhaka"){
-            staterajshahi.style.display = "none";
-            statedhaka.style.display = "block";
-        }
-        else{
-            staterajshahi.style.display = "none";
-            statedhaka.style.display = "none";
-        }
-    }
-</script>
--->
-
 
 <div class="container">
     <div class="spacer">
         <div class="row register">
             <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 ">
-                <form id="myform" action="#">
-                    <select class="form-control" id="type" onchange="postAction()">
+                <form id="myform" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
+                    <select class="form-control" id="type" name="postType" onchange="postAction()" required>
                         <option value="">What Do You Want to Do!</option>
                         <option value="sell">Sell</option>
                         <option value="rent">Rent</option>
                     </select>
-                    <select class="form-control" id="category" style="display: none;" onchange="commonOption(); dedicatedOption()">
+                    <select class="form-control" id="category" name="category" style="display: none;" onchange="dedicatedOption();" required>
                         <option value="">Choose Category</option>
                         <option value="plot">Plot</option>
                         <option value="apartment">Apartment</option>
@@ -106,44 +38,140 @@
                         <option value="agriLand">Agri Land</option>
                         <option value="shopShowroom">Shop/Showroom</option>
                         <option value="officeSpace">Office/Space</option>
+                        <option value="hostel">Hostel</option>
                     </select>
-                    <input class="form-control" id="area" style="display: none" placeholder="Type area in sq-m">
-                    <input class="form-control" id="price" style="display: none" placeholder="Price">
-                    <select class="form-control" id="priceType" style="display: none;">
+                    
+                    <input type="file" class="btn btn-primary btn-sm float-left" id="photo" style="display:none;" placeholder="Choose Photos" name="photo[]" multiple required>
+                    
+                    
+                    <input class="form-control" id="title" name="title" style="display: none" placeholder="Title" required>
+                    <input class="form-control" id="text" name="text" style="display: none" placeholder="Text" required>
+                    <input class="form-control" id="price" name="price" style="display: none" placeholder="Price" required>
+                    <select class="form-control" id="priceType" name="priceType" style="display: none;" required>
                         <option value="">Want Price to be visible?</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
                     </select>
-                    <select class="form-control" id="division" style="display: none;">
-                        <option value="">Find Division</option>
-                        <option value="east">East</option>
-                        <option value="west">West</option>
-                        <option value="north">North</option>
-                        <option value="south">South</option>
+                    
+                    <input class="form-control" id="area" name="area" style="display: none" placeholder="Type area in sq-m">
+                    <input class="form-control" id="frontRoad" name="frontRoad" style="display: none" placeholder="Front Road Size in sq. feet">
+                    <input class="form-control" id="balconie" name="balconie" style="display: none" placeholder="Number of Balconie">
+                    <input class="form-control" id="floor" name="floor" style="display: none" placeholder="Number of Floor">
+                    <input class="form-control" id="room" name="room" style="display: none" placeholder="Total Number of Room">
+                    <select class="form-control" id="hostelType" name="hostelType" style="display: none;">
+                        <option value="">Boys/Girls</option>
+                        <option value="boys">Boys</option>
+                        <option value="girls">Girls</option>
                     </select>
-                    <select class="form-control" id="district" style="display: none;">
-                        <option value="">Find District</option>
-                        <option value="rajshahi">Rajshahi</option>
-                        <option value="dhaka">Dhaka</option>
-                        <option value="dinajpur">Dinajpur</option>
-                        <option value="ranjpur">Ranjpur</option>
-                    </select>
-                    <select class="form-control" id="city" style="display: none;">
-                        <option value="">Find City</option>
-                        <option value="rajshahi">Rajshahi</option>
-                        <option value="dhaka">Dhaka</option>
-                        <option value="dinajpur">Dinajpur</option>
-                        <option value="ranjpur">Ranjpur</option>
-                    </select>
-                    <select class="form-control" id="ward" style="display: none;">
-                        <option value="">Find Ward/Union</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                    </select>
-                    <input class="form-control" id="location" style="display: none" placeholder="Location">
-                    <select class="form-control" id="userType" style="display: none;">
+                    <input class="form-control" id="seat" name="seat" style="display: none" placeholder="Number of Seat">
+                    <input class="form-control" id="bathroom" name="bathroom" style="display: none" placeholder="Number of Bathroom">
+                    <input class="form-control" id="advancePrice" name="advancePrice" style="display: none" placeholder="Advance Price!">
+                    
+
+                    <div id="divisionX"></div>
+                    <div id="districtX"></div>
+                    <div id="cityX"></div>
+                    <div id="wardX"></div>
+                    
+                    <script>
+                        document.getElementById('category').addEventListener('change', loadDivision);
+                        function loadDivision(){
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'assets/custom/php/Dropdown-Location/division.php', true);
+
+                            xhr.onload = function(){
+                                if(this.status == 200){
+                                    var division = JSON.parse(this.responseText);
+                                    var output = '';
+                                    output = '<select class="form-control" id="division" name="division" style="display: block;" required>';
+                                    output += '<option value="">Find Division</option>';
+                                    for(var i in division){
+                                        output += '<option value="'+division[i].division+'">'+division[i].division+'</option>';
+                                    }
+                                    output += '</select>';
+                                    document.getElementById('divisionX').innerHTML = output;
+                                }
+                            }
+                            xhr.send();
+                        }
+                    </script>
+                    <script>
+                        document.getElementById('divisionX').addEventListener('change', loadDistrict);
+                        function loadDistrict(){
+                            var division = document.getElementById('division').value;
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'assets/custom/php/Dropdown-Location/district.php?division='+division, true);
+
+                            xhr.onload = function(){
+                                if(this.status == 200){
+                                    var district = JSON.parse(this.responseText);
+                                    var output = '';
+                                    output = '<select class="form-control" id="district" name="district" style="display: block;" required>';
+                                    output += '<option value="">Find District</option>';
+                                    for(var i in district){
+                                        output += '<option value="'+district[i].district+'">'+district[i].district+'</option>';
+                                    }
+                                    output += '</select>';
+                                    document.getElementById('districtX').innerHTML = output;
+                                }
+                            }
+                            xhr.send();
+                        }
+                    </script>
+
+                    <script>
+                        document.getElementById('districtX').addEventListener('change', loadCity);
+                        function loadCity(){
+                            var district = document.getElementById('district').value;
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'assets/custom/php/Dropdown-Location/city.php?district='+district, true);
+
+                            xhr.onload = function(){
+                                if(this.status == 200){
+                                    var city = JSON.parse(this.responseText);
+                                    var output = '';
+                                    output = '<select class="form-control" id="city" name="city" style="display: block;" required>';
+                                    output += '<option value="">Find City</option>';
+                                    for(var i in city){
+                                        output += '<option value="'+city[i].city+'">'+city[i].city+'</option>';
+                                    }
+                                    output += '</select>';
+                                    document.getElementById('cityX').innerHTML = output;
+                                }
+                            }
+                            xhr.send();
+                        }
+                    </script>
+                    <script>
+                        document.getElementById('cityX').addEventListener('change', loadWard);
+                        function loadWard(){
+                            var city = document.getElementById('city').value;
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'assets/custom/php/Dropdown-Location/ward.php?city='+city, true);
+
+                            xhr.onload = function(){
+                                if(this.status == 200){
+                                    var ward = JSON.parse(this.responseText);
+                                    var output = '';
+                                    output = '<select class="form-control" id="ward" name="ward" style="display: block;" required>';
+                                    output += '<option value="">Find Ward</option>';
+                                    for(var i in ward){
+                                        output += '<option value="'+ward[i].ward+'">'+ward[i].ward+'</option>';
+                                    }
+                                    output += '</select>';
+                                    document.getElementById('wardX').innerHTML = output;
+                                }
+                            }
+                            xhr.send();
+                        }
+                    </script>
+
+
+
+                    <select class="form-control" id="userType" name="userType" style="display: block;">
                         <option value="">Your Relation</option>
                         <option value="owner">Owner</option>
                         <option value="developer">Developer</option>
@@ -151,20 +179,7 @@
                     </select>
                     
                     
-                    <input class="form-control" id="frontRoad" style="display: none" placeholder="Front Road Size in sq. feet">
-                    <input class="form-control" id="balconie" style="display: none" placeholder="Number of Balconie">
-                    <input class="form-control" id="floor" style="display: none" placeholder="Number of Floor">
-                    <input class="form-control" id="room" style="display: none" placeholder="Total Number of Room">
-                    <select class="form-control" id="hostelType" style="display: none;">
-                        <option value="">Boys/Girls</option>
-                        <option value="boys">Boys</option>
-                        <option value="girls">Girls</option>
-                    </select>
-                    <input class="form-control" id="seat" style="display: none" placeholder="Number of Seat">
-                    <input class="form-control" id="bathroom" style="display: none" placeholder="Number of Bathroom">
-                    <input class="form-control" id="advancePrice" style="display: none" placeholder="Advance Price!">
-                    
-                    <button type="submit" class="btn btn-success" name="Submit">Find Opinions</button>
+                    <button type="submit" class="btn btn-success" name="Submit">Add Post</button>
 
                 </form>
             </div>

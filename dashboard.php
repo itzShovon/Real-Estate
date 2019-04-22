@@ -1,8 +1,10 @@
 <?php include'header.php';?>
+<?php include'assets/custom/php/session.php';?>
+<?php include'assets/custom/php/dashboard-helper.php';?>
 <!-- banner -->
 <div class="inside-banner">
     <div class="container">
-        <span class="pull-right"><a href="#">Home</a> / Dashboard</span>
+        <span class="pull-right"><a href="index.php">Home</a> / Dashboard</span>
         <h2>Dashboard</h2>
     </div>
 </div>
@@ -16,13 +18,12 @@
 
                 <a href="edit-account.php" class="btn btn-info float-right" style="float: right;" role="button">Edit</a>
                 <!-- blog detail -->
-                <h2>Devid Ling Brown</h2>
-                <h3>PHP developer</h3>
+                <h2><?php echo $name;?></h2>
+                <h3>Email: <?php echo $email;?></h3>
 <!--                <div class="info">Posted on: Jan 20, 2013</div>-->
-                <img src="images/blog/1.jpg" class="thumbnail img-responsive" alt="blog title">
-                <p class="h4">E-Mail: blabla@bla.bla</p>
-                <p class="h4">Contact: +88 04469 5557</p>
-                <p class="h4">Location: Village, Ward, City, District, Region, Country</p>
+                <img src="<?php echo $photo;?>" class="thumbnail img-responsive" style="height: 300px; width: auto;"  alt="blog title">
+                <p class="h4">Contact: <?php echo $phone;?></p>
+                <p class="h4">Location: <?php echo $ward;?>, <?php echo $city;?>, <?php echo $district;?>, <?php echo $region;?></p>
 <!--
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
@@ -30,11 +31,41 @@
 -->
                 <!-- blog detail -->
 
-
-
-
             </div>
-            <div class="col-lg-4 visible-lg">
+
+            <!-- post table... -->
+            <?php include 'assets/custom/php/post-table.php';?>
+            <!-- <div class="col-lg-10 visible-lg">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <!-- tabs -->
 <!--
